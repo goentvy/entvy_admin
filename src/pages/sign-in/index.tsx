@@ -1,5 +1,5 @@
-import { NavLink, useNavigate } from 'react-router';
-import supabase from '../../lib/supabase';
+import { useNavigate } from 'react-router';
+import { supabase } from '../../lib/supabase';
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -7,7 +7,6 @@ import { z } from "zod"
 
 import { Button, Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Input } from '../../components/ui';
 import { toast } from "sonner";
-import { useState } from 'react';
 
 const formSchema = z.object({
     email: z.email({
@@ -27,9 +26,6 @@ const SignIn = () => {
             password: "",
         },
     });
-
-    const [name, setName] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
 
     const onSignIn = async (values: z.infer<typeof formSchema>) => {
         console.log('로그인 버튼 클릭');
@@ -57,7 +53,6 @@ const SignIn = () => {
         } catch (error) {
             console.log(error);
             throw new Error(`${error}`);
-
         }
     }
     return (

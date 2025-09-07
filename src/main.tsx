@@ -3,8 +3,8 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './pages'
 import RootLayout from './pages/layout'
-import { ThemeProvider } from "@/components/theme-provider"
 import { HashRouter, Routes, Route } from 'react-router'
+import { ThemeProvider } from './components/theme-provider'
 import SignIn from './pages/sign-in'
 
 createRoot(document.getElementById('root')!).render(

@@ -1,9 +1,31 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+interface ImportMetaEnv {
+    VITE_SUPABASE_URL: string;
+    VITE_SUPABASE_ANON_KEY: string;
+}
 
+interface ImportMeta {
+    readonly env: ImportMetaEnv;
+}
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+export interface EnvConfig {
+  supabaseUrl: string;
+  supabaseAnonKey: string;
+}
 
-export default supabase;
+export const envConfig: Readonly<EnvConfig> = {
+  supabaseUrl: import.meta.env.VITE_SUPABASE_URL,
+  supabaseAnonKey: import.meta.env.VITE_SUPABASE_ANON_KEY,
+};
+
+declare global {
+    interface ImportMeta {
+        readonly env: ImportMetaEnv;
+    }
+}
+
+export const supabase: SupabaseClient = createClient(
+    import.meta.env.VITE_SUPABASE_URL, 
+    import.meta.env.VITE_SUPABASE_ANON_KEY
+);
